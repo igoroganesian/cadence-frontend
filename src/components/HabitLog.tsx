@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import "./HabitLog.css";
 
-const HabitLog = () => {
+type HabitLogProps = {
+    habitName: string;
+    activityLog: string[];
+};
+
+const HabitLog = ({ habitName, activityLog }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
     const [activityData, setActivityData] = useState<string[]>([]);
