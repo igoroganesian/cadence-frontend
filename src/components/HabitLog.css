@@ -1,4 +1,4 @@
-.habitlog {
+.habit-log {
   margin: 1.5em;
   border: 1px solid hsla(0, 0%, 0%, 0.4);
   border-radius: 5px;
@@ -7,13 +7,13 @@
   box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25);
 }
 
-.habitlog-head {
+.habit-log-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.habitlog-head button {
+.habit-log-head button {
   background-color: hsl(252, 62%, 67%);
   color: hsl(0, 0%, 100%);
   padding: 10px 12px;
@@ -24,15 +24,15 @@
   box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25);
 }
 
-.habitlog-head button:hover {
+.habit-log-head button:hover {
   background-color: hsl(252, 62%, 60%);
 }
 
-.habitlog-head button:active {
+.habit-log-head button:active {
   background-color: hsl(252, 72%, 67%);
 }
 
-.habitlog-calendar {
+.habit-log-calendar {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

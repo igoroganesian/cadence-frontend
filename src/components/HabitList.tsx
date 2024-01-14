@@ -1,6 +1,7 @@
 import { Habit } from '../types';
 import HabitLog from "./HabitLog";
 import HabitForm from "./HabitForm";
+import './HabitList.css';
 
 type HabitListProps = {
     habits: Habit[];
@@ -9,10 +10,10 @@ type HabitListProps = {
 
 const HabitList = ({habits, onCreateHabit }: HabitListProps) => {
     return (
-        <div>
+        <div className='habit-list'>
             <HabitForm onCreateHabit={onCreateHabit} />
             {habits.map(habit => (
-                <HabitLog key={habit.id} habitName={habit.name} activityLog={habit.activityLog} />
+                <HabitLog key={habit.id} habitName={habit.name} habitColor={habit.color} activityLog={habit.activityLog} />
             ))}
         </div>
     );

@@ -1,26 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Habit } from "./types";
 import HabitList from "./components/HabitList";
-
-type Habit = {
-  id: number;
-  name: string;
-  color: string;
-  activityLog: string[];
-};
 
 function App() {
   const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
-    fetch(`${process.env.API_URL}/api/habits`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/habits`)
       .then(response => response.json())
       .then(data => setHabits(data))
       .catch(error => console.error('Error fetching habits:', error));
   }, []);
 
   const onCreateHabit = (newHabitData: Omit<Habit, 'id'>) => {
-    fetch(`${process.env.API_URL}/api/habits`, {
+    fetch(`${process.env.REACT_APP_API_URL}/api/habits`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newHabitData),

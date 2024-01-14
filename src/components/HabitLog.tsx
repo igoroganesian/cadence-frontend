@@ -1,15 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import "./HabitLog.css";
 
 type HabitLogProps = {
     habitName: string;
+    habitColor: string;
     activityLog: string[];
 };
 
-const HabitLog = ({ habitName, activityLog }: HabitLogProps) => {
+const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
-    const [activityData, setActivityData] = useState<string[]>([]);
+    const [activityData, setActivityData] = useState<string[]>(activityLog);
+
+    useEffect(() => {
+        setActivityData(activityLog);
+    }, [activityLog]);
 
     const toggleActivity = (date: string) => {
         setActivityData(prevActivityData =>
@@ -19,7 +24,7 @@ const HabitLog = ({ habitName, activityLog }: HabitLogProps) => {
     };
 
     const getCellColor = (isActivityDone: boolean): string => {
-        return isActivityDone ? '#8b77df' : '#ebedf0';
+        return isActivityDone ? habitColor : '#ebedf0';
     };
 
     const generateCalendar = () => {
@@ -48,14 +53,13 @@ const HabitLog = ({ habitName, activityLog }: HabitLogProps) => {
         return daysArray;
     };
 
-    //TODO: swap out hardcoding
     return (
-        <div className="habitlog">
-            <div className="habitlog-head">
-                <h2 className="habitlog-title">Drawing</h2>
+        <div className="habit-log">
+            <div className="habit-log-head">
+                <h2 className="habit-log-title">{habitName}</h2>
                 <button><i className="fa fa-plus"></i></button>
             </div>
-            <div className="habitlog-calendar">
+            <div className="habit-log-calendar">
                 {generateCalendar().map((day, i) => (
                     <div
                         key={i}
