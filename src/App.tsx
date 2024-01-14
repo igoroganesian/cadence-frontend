@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import HabitList from "./components/HabitList";
-import HabitForm from "./components/HabitForm";
 
 type Habit = {
   id: number;
@@ -14,14 +13,14 @@ function App() {
   const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
-    fetch('/api/habits')
+    fetch(`${process.env.API_URL}/api/habits`)
       .then(response => response.json())
       .then(data => setHabits(data))
       .catch(error => console.error('Error fetching habits:', error));
   }, []);
 
   const onCreateHabit = (newHabitData: Omit<Habit, 'id'>) => {
-    fetch('/api/habits', {
+    fetch(`${process.env.API_URL}/api/habits`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newHabitData),
