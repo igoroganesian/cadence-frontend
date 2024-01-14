@@ -5,17 +5,22 @@ export type Habit = {
   activityLog: string[];
 };
 
+// for api.ts
+export type NewHabitData = Omit<Habit, 'id'>;
+
 export type HabitLogProps = {
   habitId: number;
   habitName: string;
   habitColor: string;
   activityLog: string[];
+  onEditHabit: (updatedHabit: Habit) => void;
   onDeleteHabit: (deletedHabitId: number) => void;
 };
 
 export type HabitListProps = {
   habits: Habit[];
   onCreateHabit?: (newHabitData: Omit<Habit, 'id'>) => void;
+  onEditHabit: (updatedHabit: Habit) => void;
   onDeleteHabit: (deletedHabitId: number) => void;
 };
 
