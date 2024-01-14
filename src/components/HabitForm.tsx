@@ -53,7 +53,10 @@ const HabitForm = ({ onCreateHabit, onEditHabit, onDeleteHabit, editingHabit }: 
                 {editingHabit && onDeleteHabit && (
                     <button
                         className="delete-button"
-                        onClick={() => onDeleteHabit(editingHabit)}>Delete</button>
+                        onClick={() => onDeleteHabit(editingHabit.id)}
+                    >
+                        Delete
+                    </button>
                 )}
             </div>
         </form>

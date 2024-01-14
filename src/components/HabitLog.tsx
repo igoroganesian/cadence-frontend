@@ -4,7 +4,7 @@ import { Habit, HabitLogProps } from '../types';
 import HabitForm from './HabitForm';
 import "./HabitLog.css";
 
-const HabitLog = ({ habitId, habitName, habitColor, activityLog }: HabitLogProps) => {
+const HabitLog = ({ habitId, habitName, habitColor, activityLog, onDeleteHabit }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
     const [activityData, setActivityData] = useState<string[]>(activityLog);
@@ -66,11 +66,12 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog }: HabitLogProps
         setIsEditing(false);
     }
 
-    const handleDeleteHabit = async (habit: Habit) => {
+    const handleDeleteHabit = async (habitId: number) => {
         try {
-            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/habits/${habit.id}`);
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/habits/${habitId}`);
+            onDeleteHabit(habitId);
         } catch (error) {
-            console.error(`Error while deleting habit with ID ${habit.id}:`, error);
+            console.error(`Error while deleting habit with ID ${habitId}:`, error);
         }
     }
 

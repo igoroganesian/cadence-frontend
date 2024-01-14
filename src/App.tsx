@@ -23,10 +23,23 @@ function App() {
       .catch(error => console.error('Error creating habit:', error));
   };
 
+  const onDeleteHabit = (deletedHabitId: number) => {
+    setHabits(habits => habits.filter(habit => habit.id !== deletedHabitId));
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<HabitList habits={habits} onCreateHabit={onCreateHabit} />} />
+        <Route
+          path="/"
+          element={
+            <HabitList
+              habits={habits}
+              onCreateHabit={onCreateHabit}
+              onDeleteHabit={onDeleteHabit}
+            />
+          }
+        />
       </Routes>
     </Router>
   );
