@@ -1,22 +1,15 @@
 import { useState } from 'react';
 import "./HabitLog.css";
 
-type ActivityData = {
-    [date: string]: boolean;
-};
-
 const HabitLog = () => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
-    const [activityData, setActivityData] = useState<ActivityData>({});
+    const [activityData, setActivityData] = useState<string[]>([]);
 
     const toggleActivity = (date: string) => {
-        setActivityData(prevActivityData => {
-            return {
-                ...prevActivityData,
-                [date]: !prevActivityData[date]
-            };
-        });
+        setActivityData(prevActivityData =>
+            prevActivityData.includes(date) ? prevActivityData.filter(d => d !== date) : [...prevActivityData, date]
+        );
         console.log(date);
     };
 
@@ -43,7 +36,7 @@ const HabitLog = () => {
                 date: formattedDate,
                 isToday: day.getTime() === today.getTime(),
                 isLastYear: day < yearStart,
-                isActivityDone: !!activityData[formattedDate],
+                isActivityDone: activityData.includes(formattedDate),
             });
         }
 
