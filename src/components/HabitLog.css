@@ -4,7 +4,7 @@
   border-radius: 5px;
   padding: .1em .5em;
   background-color: rgb(244, 244, 244);
-  box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25);
+  /* box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25); */
 }
 
 .habit-log-head {
@@ -15,12 +15,7 @@
 
 .habit-log-head button {
   color: hsl(0, 0%, 100%);
-  padding: 10px 12px;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  transition: backbround-color 0.3s;
-  box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25);
+  /* box-shadow: 2px 2px 4px hsla(0, 0%, 0%, 0.25); */
 }
 
 .habit-log-head button:hover {

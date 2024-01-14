@@ -1,9 +1,33 @@
 .habit-form {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1em;
-
-  border: 5px solid rgb(100, 100, 100);
+  border: 5px solid #636363;
   border-radius: 10px;
   padding: 2em;
+  background-color: rgb(244, 244, 244);
+}
+
+input {
+  padding: 10px 15px;
+  border: 2px solid #c6c6c6;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  color: #636363;
+}
+
+input:focus {
+  border-color: #636363;
+}
+
+.habit-form button {
+  background-color: #c6c6c6;
+}
+
+.habit-form button:hover {
+  background-color: #636363;
+  color: rgb(244, 244, 244);
 }

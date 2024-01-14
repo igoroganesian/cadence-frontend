@@ -6,6 +6,7 @@ export type Habit = {
 };
 
 export type HabitLogProps = {
+  habitId: number;
   habitName: string;
   habitColor: string;
   activityLog: string[];

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { HabitLogProps } from '../types';
+import HabitForm from './HabitForm';
 import "./HabitLog.css";
 
-const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
+const HabitLog = ({ habitId, habitName, habitColor, activityLog }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
     const [activityData, setActivityData] = useState<string[]>(activityLog);
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         setActivityData(activityLog);
@@ -59,12 +61,22 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         return daysArray;
     };
 
-    //TODO: replace first button with icon?
+    // Needs to be passed as prop
+    const dummyCreateHabit = () => {
+    }
+
+    const handleEditHabit = () => {
+        setIsEditing(false);
+    }
+
+    //TODO: replace first button with icon
+    //TODO: replace title with tooltip span
     return (
         <div className="habit-log">
             <div className="habit-log-head">
                 <button
                     style={{ backgroundColor: habitColor }}
+                    onClick={() => setIsEditing(true)}
                     ><i className="fa fa-pen"></i>
                 </button>
                 <h2 className="habit-log-title">{habitName}</h2>
@@ -73,6 +85,20 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
                     onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
                 </button>
             </div>
+
+            {isEditing && (
+                <HabitForm
+                    editingHabit={{
+                        id: habitId,
+                        name: habitName,
+                        color: habitColor,
+                        activityLog: activityLog
+                    }}
+                    onEditHabit={handleEditHabit}
+                    onCreateHabit={dummyCreateHabit}
+                />
+            )}
+
             <div className="habit-log-calendar">
                 {generateCalendar().map((day, i) => (
                     <div
@@ -80,6 +106,7 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
                         className={`day ${day.isToday ? 'today' : ''} ${day.isLastYear ? 'lastYear' : ''}`}
                         style={{ backgroundColor: getCellColor(day.isActivityDone) }}
                         onClick={() => toggleActivity(day.date)}
+                        title={day.date}
                     />
                 ))}
             </div>

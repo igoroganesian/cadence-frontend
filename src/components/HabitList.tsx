@@ -8,7 +8,13 @@ const HabitList = ({habits, onCreateHabit }: HabitListProps) => {
         <div className='habit-list'>
             <HabitForm onCreateHabit={onCreateHabit} />
             {habits.map(habit => (
-                <HabitLog key={habit.id} habitName={habit.name} habitColor={habit.color} activityLog={habit.activityLog} />
+                <HabitLog
+                    key={habit.id}
+                    habitId={habit.id}
+                    habitName={habit.name}
+                    habitColor={habit.color}
+                    activityLog={habit.activityLog}
+                />
             ))}
         </div>
     );

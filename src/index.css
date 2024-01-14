@@ -2,3 +2,11 @@ body {
   margin: 0;
   font-family: Lato;
 }
+
+button {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
