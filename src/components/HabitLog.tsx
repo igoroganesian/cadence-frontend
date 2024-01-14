@@ -25,7 +25,7 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
-    }
+    };
 
     const getCellColor = (isActivityDone: boolean): string => {
         return isActivityDone ? habitColor : '#ebedf0';
@@ -37,15 +37,13 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         const yearStart = new Date(currentYear, 0, 1);
 
         const todayStr = getTodaysDate();
-        // const today = new Date(todayStr);
-        // const today = new Date();
-        // today.setHours(0, 0, 0, 0);
 
         const daysArray = [];
 
+        /** Up to and including today's date */
         for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
             const formattedDate = day.toISOString().split('T')[0];
-            /** Up to and including today's date */
+
             if (formattedDate > todayStr) {
                 break;
             }
@@ -61,12 +59,13 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         return daysArray;
     };
 
+    //TODO: replace first button with icon?
     return (
         <div className="habit-log">
             <div className="habit-log-head">
-            <button
+                <button
                     style={{ backgroundColor: habitColor }}
-                    onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
+                    ><i className="fa fa-pen"></i>
                 </button>
                 <h2 className="habit-log-title">{habitName}</h2>
                 <button

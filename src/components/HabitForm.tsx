@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Habit } from '../types';
+import ColorPalette from "./ColorPalette";
+import "./HabitForm.css";
 
 // Omit: expects a Habit with every property but id
 // void: onCreateHabit doesn't return anything
@@ -14,7 +16,10 @@ const HabitForm = ({ onCreateHabit }: { onCreateHabit: (habit: Omit<Habit, 'id'>
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form
+            className="habit-form"
+            onSubmit={handleSubmit}
+        >
             <input
                 type="text"
                 value={name}
@@ -22,10 +27,9 @@ const HabitForm = ({ onCreateHabit }: { onCreateHabit: (habit: Omit<Habit, 'id'>
                 placeholder="Habit name"
                 required
             />
-            <input
-                type="text"
-                value={color}
-                onChange={(e) => setColor(e.target.value)}
+            <ColorPalette
+                selectedColor={color}
+                onSelectColor={setColor}
             />
             <button type="submit">Create Habit</button>
         </form>

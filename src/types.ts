@@ -15,3 +15,8 @@ export type HabitListProps = {
   habits: Habit[];
   onCreateHabit: (newHabitData: Omit<Habit, 'id'>) => void;
 };
+
+export interface ColorPaletteProps {
+  selectedColor: string;
+  onSelectColor: (color: string) => void;
+}

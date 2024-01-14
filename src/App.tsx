@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Habit } from "./types";
 import HabitList from "./components/HabitList";
+import ColorPalette from "./components/ColorPalette";
 
 function App() {
   const [habits, setHabits] = useState<Habit[]>([]);
