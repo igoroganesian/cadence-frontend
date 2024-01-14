@@ -1,12 +1,7 @@
-import { Habit } from '../types';
 import HabitLog from "./HabitLog";
 import HabitForm from "./HabitForm";
+import { HabitListProps } from '../types';
 import './HabitList.css';
-
-type HabitListProps = {
-    habits: Habit[];
-    onCreateHabit: (newHabitData: Omit<Habit, 'id'>) => void;
-};
 
 const HabitList = ({habits, onCreateHabit }: HabitListProps) => {
     return (

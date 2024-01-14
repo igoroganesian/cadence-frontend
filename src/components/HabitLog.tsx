@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
+import { HabitLogProps } from '../types';
 import "./HabitLog.css";
-
-type HabitLogProps = {
-    habitName: string;
-    habitColor: string;
-    activityLog: string[];
-};
 
 const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
