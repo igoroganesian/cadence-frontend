@@ -18,6 +18,15 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         console.log(date);
     };
 
+    const getTodaysDate = () => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     const getCellColor = (isActivityDone: boolean): string => {
         return isActivityDone ? habitColor : '#ebedf0';
     };
@@ -26,20 +35,24 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
         const startDate = new Date(previousYear, 0, 1);
         const endDate = new Date(currentYear, 11, 31);
         const yearStart = new Date(currentYear, 0, 1);
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
+
+        const todayStr = getTodaysDate();
+        // const today = new Date(todayStr);
+        // const today = new Date();
+        // today.setHours(0, 0, 0, 0);
 
         const daysArray = [];
 
         for (let day = new Date(startDate); day <= endDate; day.setDate(day.getDate() + 1)) {
+            const formattedDate = day.toISOString().split('T')[0];
             /** Up to and including today's date */
-            if (day > today) {
+            if (formattedDate > todayStr) {
                 break;
             }
-            const formattedDate = day.toISOString().split('T')[0];
+
             daysArray.push({
                 date: formattedDate,
-                isToday: day.getTime() === today.getTime(),
+                isToday: formattedDate === todayStr,
                 isLastYear: day < yearStart,
                 isActivityDone: activityData.includes(formattedDate),
             });
@@ -51,8 +64,15 @@ const HabitLog = ({ habitName, habitColor, activityLog }: HabitLogProps) => {
     return (
         <div className="habit-log">
             <div className="habit-log-head">
+            <button
+                    style={{ backgroundColor: habitColor }}
+                    onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
+                </button>
                 <h2 className="habit-log-title">{habitName}</h2>
-                <button><i className="fa fa-plus"></i></button>
+                <button
+                    style={{ backgroundColor: habitColor }}
+                    onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
+                </button>
             </div>
             <div className="habit-log-calendar">
                 {generateCalendar().map((day, i) => (

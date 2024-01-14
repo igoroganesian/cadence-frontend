@@ -1,5 +1,5 @@
 .habit-log {
-  margin: 1.5em;
+  margin: 1em 2em;
   border: 1px solid hsla(0, 0%, 0%, 0.4);
   border-radius: 5px;
   padding: .1em .5em;
@@ -14,7 +14,6 @@
 }
 
 .habit-log-head button {
-  background-color: hsl(252, 62%, 67%);
   color: hsl(0, 0%, 100%);
   padding: 10px 12px;
   border: none;
