@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { HabitLogProps } from '../types';
+import axios from "axios";
+import { Habit, HabitLogProps } from '../types';
 import HabitForm from './HabitForm';
 import "./HabitLog.css";
 
@@ -61,12 +62,16 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog }: HabitLogProps
         return daysArray;
     };
 
-    // Needs to be passed as prop
-    const dummyCreateHabit = () => {
-    }
-
     const handleEditHabit = () => {
         setIsEditing(false);
+    }
+
+    const handleDeleteHabit = async (habit: Habit) => {
+        try {
+            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/habits/${habit.id}`);
+        } catch (error) {
+            console.error(`Error while deleting habit with ID ${habit.id}:`, error);
+        }
     }
 
     //TODO: replace first button with icon
@@ -95,7 +100,7 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog }: HabitLogProps
                         activityLog: activityLog
                     }}
                     onEditHabit={handleEditHabit}
-                    onCreateHabit={dummyCreateHabit}
+                    onDeleteHabit={handleDeleteHabit}
                 />
             )}
 

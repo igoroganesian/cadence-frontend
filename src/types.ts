@@ -14,8 +14,16 @@ export type HabitLogProps = {
 
 export type HabitListProps = {
   habits: Habit[];
-  onCreateHabit: (newHabitData: Omit<Habit, 'id'>) => void;
+  onCreateHabit?: (newHabitData: Omit<Habit, 'id'>) => void;
 };
+
+export interface HabitFormProps {
+  onCreateHabit?: (habit: Omit<Habit, 'id'>) => void;
+  onEditHabit?: (habit: Habit) => void;
+  onDeleteHabit?: (habit: Habit) => void;
+  editingHabit?: Habit;
+  style?: React.CSSProperties;
+}
 
 export interface ColorPaletteProps {
   selectedColor: string;

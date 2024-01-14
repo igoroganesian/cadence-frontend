@@ -16,7 +16,10 @@ const ColorPalette = ({ selectedColor, onSelectColor }: ColorPaletteProps) => {
                     key={color}
                     className={`color-palette-circle ${selectedColor === color ? 'selected' : ''}`}
                     style={{ backgroundColor: color }}
-                    onClick={() => onSelectColor(color)}
+                    onClick={() => {
+                        onSelectColor(color);
+                        console.log(color)
+                    }}
                 />
             ))}
         </div>

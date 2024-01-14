@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import { Habit } from '../types';
 import ColorPalette from "./ColorPalette";
+import { HabitFormProps } from "../types";
 import "./HabitForm.css";
 
-// Omit: expects a Habit with every property but id
-// void: onCreateHabit doesn't return anything
-const HabitForm = ({ onCreateHabit, onEditHabit, editingHabit }: {
-    onCreateHabit: (habit: Omit<Habit, 'id'>) => void;
-    onEditHabit?: (habit: Habit) => void;
-    editingHabit?: Habit;
-}) => {
+const HabitForm = ({ onCreateHabit, onEditHabit, onDeleteHabit, editingHabit }: HabitFormProps) => {
     const [name, setName] = useState("");
     const [color, setColor] = useState("#c6c6c6");
 
     useEffect(() => {
         if (editingHabit) {
+            console.log(editingHabit.name);
+            console.log(editingHabit.color);
             setName(editingHabit.name);
             setColor(editingHabit.color);
         } else {
@@ -30,7 +26,7 @@ const HabitForm = ({ onCreateHabit, onEditHabit, editingHabit }: {
         if (editingHabit) {
             onEditHabit?.({ ...editingHabit, ...habitData });
         } else {
-            onCreateHabit({ ...habitData, activityLog: [] });
+            onCreateHabit?.({ ...habitData, activityLog: [] });
         }
     };
 
@@ -50,9 +46,16 @@ const HabitForm = ({ onCreateHabit, onEditHabit, editingHabit }: {
                 selectedColor={color}
                 onSelectColor={setColor}
             />
-            <button type="submit">
-                {editingHabit ? 'Edit Habit' : "Add Habit"}
-            </button>
+            <div className="button-container">
+                <button type="submit">
+                    {editingHabit ? 'Edit Habit' : "Add Habit"}
+                </button>
+                {editingHabit && onDeleteHabit && (
+                    <button
+                        className="delete-button"
+                        onClick={() => onDeleteHabit(editingHabit)}>Delete</button>
+                )}
+            </div>
         </form>
     );
 };
