@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Habit } from "./types";
 import HabitList from "./components/HabitList";
-import ColorPalette from "./components/ColorPalette";
 
 function App() {
   const [habits, setHabits] = useState<Habit[]>([]);
