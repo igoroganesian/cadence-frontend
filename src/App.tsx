@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchHabits, createHabit } from "./api/api";
 import { Habit } from "./types";
 import HabitList from "./components/HabitList";
 
@@ -8,7 +8,7 @@ function App() {
   const [habits, setHabits] = useState<Habit[]>([]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/api/habits`)
+    fetchHabits()
       .then(response => {
         setHabits(response.data);
       })
@@ -16,11 +16,18 @@ function App() {
   }, []);
 
   const onCreateHabit = (newHabitData: Omit<Habit, 'id'>) => {
-    axios.post(`${process.env.REACT_APP_API_URL}/api/habits`, newHabitData)
+    createHabit(newHabitData)
       .then(response => {
         setHabits(prevHabits => [...prevHabits, response.data]);
       })
       .catch(error => console.error('Error creating habit:', error));
+  };
+
+  const onEditHabit = (updatedHabit: Habit) => {
+    setHabits(currentHabits =>
+      currentHabits.map(habit =>
+        habit.id === updatedHabit.id ? updatedHabit : habit)
+    );
   };
 
   const onDeleteHabit = (deletedHabitId: number) => {
@@ -36,6 +43,7 @@ function App() {
             <HabitList
               habits={habits}
               onCreateHabit={onCreateHabit}
+              onEditHabit={onEditHabit}
               onDeleteHabit={onDeleteHabit}
             />
           }
@@ -43,6 +51,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

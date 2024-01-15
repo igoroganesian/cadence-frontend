@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { updateHabit, deleteHabit } from '../api/api';
 import { Habit, HabitLogProps } from '../types';
 import HabitForm from './HabitForm';
 import "./HabitLog.css";
 
-const HabitLog = ({ habitId, habitName, habitColor, activityLog, onDeleteHabit }: HabitLogProps) => {
+const HabitLog = ({ habitId, habitName, habitColor, activityLog, onEditHabit, onDeleteHabit }: HabitLogProps) => {
     const currentYear = new Date().getFullYear();
     const previousYear = currentYear - 1;
     const [activityData, setActivityData] = useState<string[]>(activityLog);
@@ -62,28 +63,33 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog, onDeleteHabit }
         return daysArray;
     };
 
-    const handleEditHabit = () => {
-        setIsEditing(false);
-    }
+    const handleEditHabit = async (updatedHabit: Habit) => {
+        try {
+            await updateHabit(updatedHabit);
+            onEditHabit(updatedHabit);
+            setIsEditing(false);
+        } catch (error) {
+            console.error('Error updating habit:', error);
+        }
+    };
 
     const handleDeleteHabit = async (habitId: number) => {
         try {
-            const response = await axios.delete(`${process.env.REACT_APP_API_URL}/api/habits/${habitId}`);
+            await deleteHabit(habitId);
             onDeleteHabit(habitId);
         } catch (error) {
             console.error(`Error while deleting habit with ID ${habitId}:`, error);
         }
-    }
+    };
 
-    //TODO: replace first button with icon
-    //TODO: replace title with tooltip span
+    //TODO: replace title with tooltip span?
     return (
         <div className="habit-log">
             <div className="habit-log-head">
                 <button
                     style={{ backgroundColor: habitColor }}
-                    onClick={() => setIsEditing(true)}
-                    ><i className="fa fa-pen"></i>
+                    onClick={() => setIsEditing(prevIsEditing => !prevIsEditing)}
+                ><i className="fa fa-pen"></i>
                 </button>
                 <h2 className="habit-log-title">{habitName}</h2>
                 <button
