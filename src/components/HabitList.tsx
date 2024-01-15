@@ -16,17 +16,24 @@ const HabitList = ({ habits, onCreateHabit, onEditHabit, onDeleteHabit }: HabitL
 
     return (
         <div className='habit-list'>
+            <div className="habit-list-head">
             <button
                 onClick={() => setShowForm(prevVisible => !prevVisible)}
                 className="form-toggle-button"
             >
-                {showForm ? 'Close' : 'Create Habit'}
+                {showForm ? <i className="fa fa-minus"></i> : <i className="fa fa-plus"></i>}
             </button>
+            </div>
+            <div className={showForm ? "overlay show" : "overlay"}
+                onClick={() => setShowForm(false)}
+            >
+            </div>
             {showForm && (
                 <HabitForm
                     onCreateHabit={handleCreateHabit}
                     onEditHabit={onEditHabit}
                     onDeleteHabit={onDeleteHabit}
+                    onClose={() => setShowForm(false)}
                 />
             )}
             {habits.map(habit => (

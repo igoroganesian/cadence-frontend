@@ -30,6 +30,7 @@ export interface HabitFormProps {
   onDeleteHabit?: (habitId: number) => void;
   editingHabit?: Habit;
   style?: React.CSSProperties;
+  onClose: () => void;
 }
 
 export interface ColorPaletteProps {

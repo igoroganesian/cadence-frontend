@@ -1,6 +1,14 @@
 .habit-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin: 1em;
+}
+
+.habit-list-head {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-toggle-button {
+  border-radius: 50%;
 }

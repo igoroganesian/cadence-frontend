@@ -82,22 +82,29 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog, onEditHabit, on
         }
     };
 
-    //TODO: replace title with tooltip span?
+    //TODO: replace date hover title with tooltip span?
     return (
         <div className="habit-log">
             <div className="habit-log-head">
-                <button
-                    style={{ backgroundColor: habitColor }}
-                    onClick={() => setIsEditing(prevIsEditing => !prevIsEditing)}
-                ><i className="fa fa-pen"></i>
-                </button>
                 <h2 className="habit-log-title">{habitName}</h2>
-                <button
-                    style={{ backgroundColor: habitColor }}
-                    onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
-                </button>
+                <div className="habit-log-buttons">
+                    <button
+                        className="habit-log-edit-button"
+                        onClick={() => setIsEditing(prevIsEditing => !prevIsEditing)}
+                    ><i className="fa fa-pen"></i>
+                    </button>
+                    <button
+                        className="habit-log-activity-button"
+                        style={{ backgroundColor: habitColor }}
+                        onClick={() => toggleActivity(getTodaysDate())}><i className="fa fa-check"></i>
+                    </button>
+                </div>
             </div>
-
+            <div
+                className={isEditing ? "overlay show" : "overlay"}
+                onClick={() => setIsEditing(false)}
+            >
+            </div>
             {isEditing && (
                 <HabitForm
                     editingHabit={{
@@ -108,6 +115,7 @@ const HabitLog = ({ habitId, habitName, habitColor, activityLog, onEditHabit, on
                     }}
                     onEditHabit={handleEditHabit}
                     onDeleteHabit={handleDeleteHabit}
+                    onClose={() => setIsEditing(false)}
                 />
             )}
 
