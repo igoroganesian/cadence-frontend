@@ -3,14 +3,12 @@ import ColorPalette from "./ColorPalette";
 import { HabitFormProps } from "../types";
 import "./HabitForm.css";
 
-const HabitForm = ({ onCreateHabit, onEditHabit, onDeleteHabit, editingHabit }: HabitFormProps) => {
+const HabitForm = ({ onCreateHabit, onEditHabit, onDeleteHabit, onClose, editingHabit }: HabitFormProps) => {
     const [name, setName] = useState("");
-    const [color, setColor] = useState("#c6c6c6");
+    const [color, setColor] = useState("#636363");
 
     useEffect(() => {
         if (editingHabit) {
-            console.log(editingHabit.name);
-            console.log(editingHabit.color);
             setName(editingHabit.name);
             setColor(editingHabit.color);
         } else {
@@ -42,6 +40,13 @@ const HabitForm = ({ onCreateHabit, onEditHabit, onDeleteHabit, editingHabit }: 
                 placeholder="Name"
                 required
             />
+            <button
+                type="button"
+                className="close-button"
+                onClick={onClose}
+            >
+                <i className="fa fa-times"></i>
+            </button>
             <ColorPalette
                 selectedColor={color}
                 onSelectColor={setColor}

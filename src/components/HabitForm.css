@@ -4,10 +4,23 @@
   justify-content: center;
   align-items: center;
   gap: 1em;
-  border: 5px solid #636363;
+  border: 2px solid #636363;
   border-radius: 10px;
   padding: 2em;
+  margin-top: 1em;
   background-color: rgb(244, 244, 244);
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.close-button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  border-radius: 30%;
 }
 
 input {
@@ -29,11 +42,37 @@ input:focus {
 
 .habit-form button:hover {
   background-color: #636363;
+  /* background-color: #2a6c3b; */
   color: rgb(244, 244, 244);
 }
 
 .habit-form .delete-button {
-  background-color: #cc0029;
+  background-color: #9c0322;
   color: white;
   margin-left: 5em;
+}
+
+.habit-form .delete-button:hover {
+  background-color: #cc0029;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+
+@media (max-width: 570px) {
+  .close-button {
+    margin-left: 3em;
+  }
 }
