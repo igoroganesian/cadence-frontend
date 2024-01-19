@@ -4,6 +4,7 @@
   border-radius: 5px;
   padding: .1em .5em;
   background-color: rgb(244, 244, 244);
+  max-width: 1080px;
 }
 
 .habit-log-head {

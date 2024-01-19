@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
 import { updateHabit, deleteHabit } from '../api/api';
 import { Habit, HabitLogProps } from '../types';
 import HabitForm from './HabitForm';
