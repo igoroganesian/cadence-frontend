@@ -13,7 +13,6 @@ describe('ColorPalette Component', () => {
     const mockOnSelectColor = jest.fn();
 
     it('renders without crashing', () => {
-        const mockOnSelectColor = jest.fn();
         render(<ColorPalette selectedColor="#FFFF33" onSelectColor={mockOnSelectColor} />);
     });
 
@@ -33,7 +32,6 @@ describe('ColorPalette Component', () => {
         const rgbSelectedColor = hexToRgb(selectedColor);
         const { container } = render(<ColorPalette selectedColor={selectedColor} onSelectColor={mockOnSelectColor} />);
         const colorCircles = container.querySelectorAll('.color-palette-circle');
-
         // Type errors don't impact JS runtime, but HTMLElement is necessary here to avoid a VSCode error
         const selectedCircle = Array.from(colorCircles).find(circle => (circle as HTMLElement).style.backgroundColor === rgbSelectedColor);
 
@@ -41,7 +39,6 @@ describe('ColorPalette Component', () => {
     });
 
     it('calls onSelectColor with the correct color when a circle is clicked', () => {
-        const mockOnSelectColor = jest.fn();
         const selectedColor = "#636363";
         const rgbSelectedColor = hexToRgb(selectedColor);
 
