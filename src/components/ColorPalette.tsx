@@ -14,6 +14,7 @@ const ColorPalette = ({ selectedColor, onSelectColor }: ColorPaletteProps) => {
             {colors.map(color => (
                 <div
                     key={color}
+                    data-testid="color-palette-circle"
                     className={`color-palette-circle ${selectedColor === color ? 'selected' : ''}`}
                     style={{ backgroundColor: color }}
                     onClick={() => {
