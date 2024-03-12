@@ -10,7 +10,6 @@ Emphasizing simplicity and efficacy, Cadence provides a streamlined platform for
 ![cadenceedit](https://github.com/igoroganesian/cadence-frontend/assets/101779316/3b1cc964-0b0f-403d-b1ab-a84a57ac5a29)
 ![cadence2](https://github.com/igoroganesian/cadence-frontend/assets/101779316/99628e9a-bfa7-4807-9738-a5943b5d7897)
 
-
 # To do:
 
 - User models w/ login functionality to preserve activity data
